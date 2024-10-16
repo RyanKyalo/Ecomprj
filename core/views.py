@@ -31,7 +31,7 @@ def category_list_view(request):
     
 def  category_product_list_view(request,cid):
         category = Category.object.get(cid=cid)
-        prodects = Product.object.filter(product_status="published, category=category")
+        products = Product.object.filter(product_status="published, category=category")
         
         context ={
             "category":category,
@@ -39,3 +39,19 @@ def  category_product_list_view(request,cid):
         }
         
         return render(request, "core/category-product-list.html")
+    
+def vendor_list_view(request):
+    vendor = Vendor.objects.all()
+    context = {
+        "vendor": vendor,
+    }
+    return render(request, "core/vendor-list.html", context)
+
+def vendor_detail_view(request,vid):
+    vendor = Vendor.objects.get(vid=vid)
+    products = Product.objects.filter(vendor = vendor, product_status= "published")
+    context = {
+        "vendor": vendor,
+        "products": products,
+    }
+    return render(request, "core/vendor-detail.html", context)

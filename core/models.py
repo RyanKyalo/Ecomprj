@@ -57,6 +57,7 @@ class Vendor(models.Model):
     vid = ShortUUIDField(unique=True, length=10, max_length=20, prefix= "ven",alphabet="abcdefgh12345")
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to=user_directory_path)
+    cover_image = models.ImageField(upload_to=user_directory_path)
     description = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=100)
     chat_response_time = models.CharField(max_length=100)
@@ -120,7 +121,7 @@ class Product(models.Model):
         return self.title
     
      def get_percentage(self):
-        new_price = (self.price/ self.old.price) * 100
+        new_price = (self.price/ self.old_price) * 100
         return new_price
     
     
