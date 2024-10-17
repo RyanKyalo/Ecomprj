@@ -121,13 +121,13 @@ class Product(models.Model):
         return self.title
     
      def get_percentage(self):
-        new_price = (self.price/ self.old_price) * 100
+        new_price = (self.price/self.old_price) * 100
         return new_price
     
     
 class ProductImages(models.Model):
     images = models.ImageField(upload_to="product-images", default="product.jpg")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name="p_image" , on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     
     
